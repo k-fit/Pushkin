@@ -1,15 +1,28 @@
 import dateutil
 from collections import Counter
 
-f = open('purch_data1.txt')
+def clean_ids(name, outname):
+    f = open(name)
+    g = open(outname, 'w')
+    ids = {}
+    
+    counter = 0
 
-idlist = [] 
+    for line in f:
+        items = line.split(',')
+        if items[0] in ids:
+            items[0] = str(ids[items[0]])
+        else:
+            ids[items[0]] = counter
+            items[0] = str(counter)
+            counter += 1
+            L = ','.join(items)
+        g.write(L)
+    f.close()
+    g.close()
 
-for line in f:
-    items = line.split(',')
-    idlist.append(items[0])
-
-idcounter = Counter(idlist)
-
-multiple = [c for c in idcounter if idcounter[c] > 2]
-print len(multiple)
+for i in range(1,4):
+    name = "purch_data" + str(i) + ".txt"
+    outname = "clean_purch" + str(i) + ".txt"
+    print name, outname
+    clean_ids(name,outname)
