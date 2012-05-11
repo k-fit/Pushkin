@@ -13,7 +13,7 @@ from collections import Counter
 # The maximum value for T is 39 weeks.  
 # Time is, confusingly, measured in weeks.
 
-FILENAME = 'bg_data.txt'
+FILENAME = 'bg_data.dat'
 
 # This is the log likelihood of observing the data given the model parameters
 def objfun(x):
